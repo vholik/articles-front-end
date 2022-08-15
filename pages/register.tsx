@@ -5,6 +5,7 @@ import { useSendUserMutation } from "./redux/authApi";
 import { addToken } from "./redux/userSlice";
 import Router from "next/router";
 import { LoginStyling } from "./style/style";
+import { IUser } from "./types";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -16,29 +17,32 @@ export default function RegisterPage() {
   const [isError, setIsError] = useState<boolean>(false);
   const [sendUser] = useSendUserMutation();
 
-  const loginSuccess = (payload: string) => {
+  const loginSuccess = (payload: IUser) => {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        isLogged: true,
+        token: payload.token,
+        me: payload,
+      })
+    );
     dispatch(addToken(payload));
     setIsError(false);
-    Router.push("/");
+    window.location.replace("/");
   };
 
-  const handleSendUser = async (e) => {
+  const handleSendUser = async (e: React.FormEvent) => {
     e.preventDefault();
     await sendUser(formData)
       .unwrap()
       .then((payload) => {
         setIsError(false);
-        loginSuccess(payload.token);
+        loginSuccess(payload);
       })
       .catch((error) => {
         console.log(error);
         setIsError(true);
       });
-
-    // setFormData({
-    //   email: "",
-    //   password: "",
-    // });
   };
   return (
     <LoginStyling>

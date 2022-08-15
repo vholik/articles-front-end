@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Router from "next/router";
 import Link from "next/link";
 import { LoginStyling } from "./style/style";
+import { IUser } from "./types";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -17,29 +18,34 @@ const LoginPage = () => {
 
   const [getUser] = useGetUserMutation();
 
-  const loginSuccess = (payload: string) => {
+  const loginSuccess = (payload: IUser) => {
+    console.log(payload);
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        isLogged: true,
+        token: payload.token,
+        me: payload,
+      })
+    );
     dispatch(addToken(payload));
     setIsError(false);
-    Router.push("/");
+    // Router.push("/");
+    window.location.replace("/");
   };
 
-  const handleGetUser = async (e) => {
+  const handleGetUser = async (e: React.FormEvent) => {
     e.preventDefault();
     await getUser(formData)
       .unwrap()
       .then((payload) => {
         setIsError(false);
-        loginSuccess(payload.token);
+        loginSuccess(payload);
       })
       .catch((error) => {
         console.log(error);
         setIsError(true);
       });
-
-    // setFormData({
-    //   email: "",
-    //   password: "",
-    // });
   };
   return (
     <LoginStyling>

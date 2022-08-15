@@ -1,35 +1,54 @@
 import { NextPage } from "next";
 import { IPost } from "../types";
 import { PostStyling } from "../style/style";
-
+import Eye from "../images/Eye.svg";
+import Image from "next/image";
 import Link from "next/link";
-export const Post: NextPage<IPost> = ({ tags, text, title, id }) => {
+import lackOfImage from "../images/lackofimage.svg";
+
+export const Post: NextPage<IPost> = ({
+  tags,
+  text,
+  title,
+  id,
+  fullName,
+  viewsCount,
+  imageUrl,
+}) => {
   return (
     <PostStyling>
       <Link href={`posts/${id}`}>
         <div>
-          <div className="user-header">
-            <div className="user-icon"></div>
-            <h2 className="user-name">Adam Gross</h2>
+          {imageUrl ? (
+            <div
+              className="post-image"
+              style={{
+                backgroundImage: `url('http://localhost:4444${imageUrl}')`,
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+          ) : (
+            <div className="lack-of-image">
+              <Image src={lackOfImage} height={60} width={60} />
+            </div>
+          )}
+
+          <div className="tags-wrapper">
+            {tags.map((tag, i) => (
+              <div key={i} className="post-tag">
+                {tag}
+              </div>
+            ))}
           </div>
-          <div className="post-body">
-            <div className="left">
-              <h1 className="post-title">{title}</h1>
-              <p className="post-text">{text.slice(0, 200)}...</p>
-            </div>
-            <div className="right">
-              <div className="post-image"></div>
-            </div>
-          </div>
-          <div className="post-bottom">
-            <div className="tags-wrapper">
-              {tags.map((tag, i) => (
-                <div key={i} className="post-tag">
-                  {tag}
-                </div>
-              ))}
-            </div>
-            <p className="post-time">3 min read</p>
+          <h1 className="post-title">{title}</h1>
+          <div className="bottom">
+            <p className="author">{fullName}</p>
+            <p className="views">
+              <Image src={Eye} height={25} width={25} />
+              {viewsCount}
+            </p>
           </div>
         </div>
       </Link>
