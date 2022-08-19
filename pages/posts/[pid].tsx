@@ -87,7 +87,7 @@ export default function Post() {
             <div
               className="cover"
               style={{
-                backgroundImage: `url('http://localhost:4444${data?.imageUrl}')`,
+                backgroundImage: `url('${process.env.API_URL}${data?.imageUrl}')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",

@@ -31,7 +31,7 @@ export const Post: NextPage<IPost> = ({
             <div
               className="post-image"
               style={{
-                backgroundImage: `url('http://localhost:4444${imageUrl}')`,
+                backgroundImage: `url('${process.env.API_URL}${imageUrl}')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",

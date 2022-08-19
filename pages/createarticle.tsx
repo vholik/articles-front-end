@@ -45,7 +45,7 @@ const CreateArticle: NextPage = () => {
     setTextAreaValue(value);
   }, []);
 
-  const src = `http://localhost:4444${imageUrl}`;
+  const src = `${process.env.API_URL}{imageUrl}`;
 
   const imageHandler = async (e: React.ChangeEvent) => {
     const formFiles = new FormData();
