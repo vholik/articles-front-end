@@ -20,6 +20,7 @@ export const HeaderStyling = styled.div`
       }
       .search-result {
         overflow-y: scroll;
+        overflow-x: hidden;
         display: none;
         z-index: 5;
         position: absolute;
@@ -30,12 +31,17 @@ export const HeaderStyling = styled.div`
         border-radius: 12px;
         bottom: -300px;
         border: 1px solid var(--border);
-        padding: 23px;
+        padding: 14px;
         .searched-post {
           color: var(--second-text-color);
           font-size: 18px;
-          margin-top: 5px;
+          padding: 20px 10px;
+          border-radius: 12px;
           cursor: pointer;
+          transition: background 0.1s linear;
+          &:hover {
+            background-color: var(--border);
+          }
         }
       }
       .search-input {
@@ -128,6 +134,27 @@ export const HeaderStyling = styled.div`
 `;
 
 export const HomeStyling = styled.div`
+  .popular-tags-wrapper {
+    grid-column: 3;
+    width: 100%;
+    height: fit-content;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    border-radius: 12px;
+    padding: 23px;
+    margin-top: 124px;
+    .popular-tags-title {
+      font-size: 21px;
+      color: white;
+      font-weight: 500;
+      margin-bottom: 18px;
+    }
+    .tag {
+      color: var(--second-text-color);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  }
   .posts-wrapper {
     margin-top: 25px;
     grid-column: 2;
@@ -281,7 +308,7 @@ export const AuthStyling = styled.div`
     }
   }
   .error {
-    margin-top: 16px;
+    margin: 0 0 25px 0;
     font-size: 14px;
   }
   button {

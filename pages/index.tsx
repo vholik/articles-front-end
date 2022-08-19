@@ -25,10 +25,25 @@ const Home: NextPage = () => {
         />
       </div>
     );
+  const popularPosts = [...data].sort((a, b) => b.viewsCount - a.viewsCount);
+  const popularTags = (): [] | Array<string> => {
+    let tags: Array<string> = [];
+    popularPosts.map((post: post) => {
+      if (tags.length < 6) {
+        tags.push(...post.tags);
+      } else {
+        return;
+      }
+    });
+    return tags;
+  };
 
   return (
     <HomeStyling>
       <div className="container">
+        <div className="tags-wrapper">
+          <div className="tags-title"></div>
+        </div>
         <div className="posts-wrapper">
           <div className="filter">
             <button
@@ -75,6 +90,14 @@ const Home: NextPage = () => {
                     imageUrl={post.imageUrl!}
                   />
                 ))}
+        </div>
+        <div className="popular-tags-wrapper">
+          <h1 className="popular-tags-title">Popular tags</h1>
+          {popularTags().map((tag: string, index: number) => (
+            <div className="tag" key={index}>
+              #{tag.trim()}
+            </div>
+          ))}
         </div>
       </div>
     </HomeStyling>
