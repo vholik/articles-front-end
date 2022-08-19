@@ -110,7 +110,7 @@ export const HeaderStyling = styled.div`
         height: 100%;
         background-color: var(--primary);
         padding: 23px 0;
-        width: 200px;
+        width: 150px;
         font-size: 16px;
         border: 0;
         font-family: Inter;

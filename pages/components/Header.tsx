@@ -65,6 +65,13 @@ export const Header: NextPage = () => {
             />
             <Image src={Search} alt="Search" />
             <div className="search-result">
+              {data.filter((post: post) =>
+                post.title.toLowerCase().includes(searchValue)
+              ).length === 0 && (
+                <div className="searched-post">
+                  No results with the key {searchValue}
+                </div>
+              )}
               {data
                 .filter((post: post) =>
                   post.title.toLowerCase().includes(searchValue)
