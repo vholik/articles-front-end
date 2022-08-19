@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import { IPost } from "../types";
 import { PostStyling } from "../style/style";
-import Eye from "../images/Eye.svg";
 import Image from "next/image";
 import Link from "next/link";
 import lackOfImage from "../images/lackofimage.svg";
+import Eye from "../images/showsCount.svg";
 
 export const Post: NextPage<IPost> = ({
   tags,
@@ -18,7 +18,15 @@ export const Post: NextPage<IPost> = ({
   return (
     <PostStyling>
       <Link href={`posts/${id}`}>
-        <div>
+        <div className="post-wrapper">
+          <div className="top">
+            <p className="author">{fullName}</p>
+            <div className="shows-count">
+              <Image src={Eye} alt="Shows count" />
+              <p>{viewsCount}</p>
+            </div>
+          </div>
+          <h1 className="post-title">{title}</h1>
           {imageUrl ? (
             <div
               className="post-image"
@@ -31,24 +39,16 @@ export const Post: NextPage<IPost> = ({
             ></div>
           ) : (
             <div className="lack-of-image">
-              <Image src={lackOfImage} height={60} width={60} />
+              <Image src={lackOfImage} height={45} width={45} alt="no image" />
             </div>
           )}
 
           <div className="tags-wrapper">
             {tags.map((tag, i) => (
               <div key={i} className="post-tag">
-                {tag}
+                #{tag.trim()}
               </div>
             ))}
-          </div>
-          <h1 className="post-title">{title}</h1>
-          <div className="bottom">
-            <p className="author">{fullName}</p>
-            <p className="views">
-              <Image src={Eye} height={25} width={25} />
-              {viewsCount}
-            </p>
           </div>
         </div>
       </Link>

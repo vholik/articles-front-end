@@ -1,10 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSendUserMutation } from "./redux/authApi";
 import { addToken } from "./redux/userSlice";
 import Router from "next/router";
-import { LoginStyling } from "./style/style";
+import { AuthStyling } from "./style/style";
 import { IUser } from "./types";
 
 export default function RegisterPage() {
@@ -45,28 +46,28 @@ export default function RegisterPage() {
       });
   };
   return (
-    <LoginStyling>
+    <AuthStyling>
       <h1>Explore new articles with us</h1>
       <form onSubmit={handleSendUser} className="input-wrapper">
         <input
           type="email"
           name=""
           id=""
-          placeholder="email"
+          placeholder="Type your e-mail"
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
         <input
           type="text"
           name=""
           id=""
-          placeholder="password"
+          placeholder="Create a password"
           onChange={(e) =>
             setFormData({ ...formData, password: e.target.value })
           }
         />
         <input
           type="text"
-          placeholder="full name"
+          placeholder="Type your full name"
           onChange={(e) =>
             setFormData({ ...formData, fullName: e.target.value })
           }
@@ -74,6 +75,6 @@ export default function RegisterPage() {
         <button>Register</button>
         {isError && <p style={{ color: "red" }}>Can't register</p>}
       </form>
-    </LoginStyling>
+    </AuthStyling>
   );
 }

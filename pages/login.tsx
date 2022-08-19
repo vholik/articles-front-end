@@ -4,7 +4,7 @@ import { addToken } from "./redux/userSlice";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
 import Link from "next/link";
-import { LoginStyling } from "./style/style";
+import { AuthStyling } from "./style/style";
 import { IUser } from "./types";
 
 const LoginPage = () => {
@@ -48,7 +48,7 @@ const LoginPage = () => {
       });
   };
   return (
-    <LoginStyling>
+    <AuthStyling>
       <h1>Login to your account</h1>
       <form className="input-wrapper" onSubmit={handleGetUser}>
         <input
@@ -76,7 +76,7 @@ const LoginPage = () => {
         )}
         <button type="submit">Login</button>
       </form>
-    </LoginStyling>
+    </AuthStyling>
   );
 };
 

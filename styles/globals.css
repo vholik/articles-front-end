@@ -1,11 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Neue Montreal", sans-serif;
-  --black: rgb(23, 23, 23);
-  --primary: #cc635d;
+  font-family: "Inter", sans-serif;
+  --background: #181d1c;
+  --second-text-color: #768787;
+  --border: #252525;
+  --primary: #adff00;
+  background-color: #000000;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .loading-wrapper span {
@@ -24,12 +33,9 @@ a {
   padding: 0;
 }
 
-.container-header {
-  width: 1400px;
-  margin: 0 auto;
-}
-
 .container {
-  width: 1000px;
-  margin: 0 auto;
+  padding: 0 100px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-column-gap: 100px;
 }

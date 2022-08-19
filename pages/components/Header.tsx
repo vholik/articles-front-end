@@ -4,16 +4,24 @@ import Link from "next/link";
 import { logOut } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
-import { useEffect, useState } from "react";
-import WriteIcon from "../images/Write.png";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Logo from "../images/logo.svg";
+import Search from "../images/Search.svg";
+import Write from "../images/write.svg";
+import Account from "../images/account.svg";
+import Logout from "../images/Logout.svg";
+import { useGetPostsQuery } from "../redux/postsApi";
+import { post } from "../types";
 
 export const Header: NextPage = () => {
+  const { data = [], isLoading } = useGetPostsQuery();
   const dispatch = useDispatch();
-
+  const [searchValue, setSearchValue] = useState("");
   const [user, setUser] = useState({
     isLogged: false,
-    token: null,
+    token: "",
+    me: {},
   });
 
   useEffect(() => {
@@ -23,43 +31,88 @@ export const Header: NextPage = () => {
     }
   }, [dispatch]);
 
-  console.log(user);
-
   const logOutHandler = () => {
     localStorage.removeItem("user");
     setUser({
       isLogged: false,
-      token: null,
+      token: "",
+      me: {},
     });
     dispatch(logOut());
     Router.push("/");
   };
+
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    console.log(searchValue);
+  };
+
   return (
     <HeaderStyling>
-      <Link href="/">
-        <div className="logo">SPLASH</div>
-      </Link>
-      {user.isLogged ? (
-        <div className="right">
-          <p onClick={logOutHandler}>Log out</p>
-
+      <div className="container">
+        <Link href="/">
+          <div className="logo">
+            <Image src={Logo} alt="Logo" />
+          </div>
+        </Link>
+        <div className="middle">
+          <div className="input-wrapper">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search"
+              onChange={searchHandler}
+            />
+            <Image src={Search} alt="Search" />
+            <div className="search-result">
+              {data
+                .filter((post: post) =>
+                  post.title.toLowerCase().includes(searchValue)
+                )
+                .map((post: post, key: number) => (
+                  <div key={post._id}>
+                    <Link href={`/posts/${post._id}`}>
+                      <div className="searched-post">
+                        {key + 1}. {post.title}
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+            </div>
+          </div>
           <Link href="/createarticle">
-            <button>
-              <Image src={WriteIcon} height={35} width={35} />
-              Create an article
+            <button className="write-btn">
+              <Image src={Write} alt="Write" />
+              Write an article
             </button>
           </Link>
         </div>
-      ) : (
-        <div className="right">
-          <Link href="/login">
-            <p>Login</p>
-          </Link>
-          <Link href="/register">
-            <button>Register</button>
-          </Link>
-        </div>
-      )}
+
+        {user.isLogged ? (
+          <div className="right">
+            <div className="right__inner">
+              <button className="login-btn" onClick={logOutHandler}>
+                <Image src={Logout} alt="Log in" />
+                Log out
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="right">
+            <div className="right__inner">
+              <Link href="/login">
+                <button className="login-btn">
+                  <Image src={Account} alt="Log in" />
+                  Log in
+                </button>
+              </Link>
+              <Link href="/register">
+                <button className="register-btn">Register</button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </HeaderStyling>
   );
 };

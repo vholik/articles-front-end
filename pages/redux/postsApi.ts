@@ -27,7 +27,26 @@ export const postsApi = createApi({
         headers: {
           Authorization: JSON.parse(localStorage.getItem("user")!).token,
         },
-        body: body[0],
+        body: body,
+      }),
+    }),
+    updatePost: build.mutation({
+      query: (body) => ({
+        url: `/posts/${body._id}`,
+        method: "PATCH",
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("user")!).token,
+        },
+        body: body,
+      }),
+    }),
+    deletePost: build.mutation({
+      query: (id) => ({
+        url: `/posts/${id}`,
+        method: "DELETE",
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("user")!).token,
+        },
       }),
     }),
   }),
@@ -38,4 +57,6 @@ export const {
   useGetPostQuery,
   useSendPostMutation,
   useSendImageMutation,
+  useUpdatePostMutation,
+  useDeletePostMutation,
 } = postsApi;

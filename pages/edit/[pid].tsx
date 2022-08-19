@@ -1,44 +1,54 @@
-import { NextPage } from "next";
-import Router from "next/router";
-import { useEffect, useState } from "react";
-import { useSendPostMutation, useSendImageMutation } from "./redux/postsApi";
-import { CreateArticleStyling } from "./style/style";
-import { useCallback } from "react";
-import "easymde/dist/easymde.min.css";
+import {
+  useGetPostQuery,
+  useSendImageMutation,
+  useUpdatePostMutation,
+} from "../redux/postsApi";
+import { useRouter } from "next/router";
+import { CreateArticleStyling } from "../style/style";
 import Image from "next/image";
+import Router from "next/router";
+import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import SaveIcon from "./images/save.svg";
+import SendIcon from "../images/Save.svg";
+import "easymde/dist/easymde.min.css";
 
 const SimpleMdeEditor = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
-const CreateArticle: NextPage = () => {
+export default function EditPost() {
+  const router = useRouter();
+  const { pid } = router.query;
+  const { data = {}, isLoading } = useGetPostQuery(pid);
   const [user, setUser] = useState({
     isLogged: false,
-    token: null,
+    token: "",
+    me: {},
   });
-
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("user")!);
-    if (saved?.isLogged) {
-      setUser(saved);
+    const localUser = JSON.parse(localStorage.getItem("user")!);
+    if (localUser.isLogged) {
+      setUser(localUser);
     } else {
-      alert("Create an account first");
-      Router.push(`/login`);
+      alert("Login first");
+      Router.push("/login");
+    }
+    if (localUser.me._id !== data?.user?._id) {
+      alert("You don't have permission");
+      Router.push("/login");
     }
   }, []);
 
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(data.imageUrl || "");
   const [formData, setFormData] = useState({
-    title: "",
-    tags: "",
+    title: data?.title,
+    tags: data?.tags?.toString(),
   });
-  const [textareaValue, setTextAreaValue] = useState("");
+  const [textareaValue, setTextAreaValue] = useState(data?.text);
 
   const [sendImage] = useSendImageMutation();
 
-  const [sendPost] = useSendPostMutation();
+  const [updatePost] = useUpdatePostMutation();
 
   const markdownHandler = useCallback((value: string) => {
     setTextAreaValue(value);
@@ -70,11 +80,15 @@ const CreateArticle: NextPage = () => {
   const handleSendPost = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await sendPost({ ...formData, text: textareaValue, imageUrl })
+    await updatePost({
+      ...formData,
+      text: textareaValue,
+      imageUrl,
+      _id: data._id,
+    })
       .unwrap()
       .then((payload) => {
-        console.log(payload);
-        Router.push(`posts/${payload._id}`);
+        window.location.replace(`/posts/${data._id}`);
       })
       .catch((error) => {
         alert("Error ocurred");
@@ -114,6 +128,7 @@ const CreateArticle: NextPage = () => {
               <input
                 type="text"
                 placeholder="Title"
+                value={formData.title}
                 onChange={(e) =>
                   setFormData({ ...formData, title: e.target.value })
                 }
@@ -121,6 +136,7 @@ const CreateArticle: NextPage = () => {
               <input
                 type="text"
                 placeholder="Tags"
+                value={formData.tags}
                 onChange={(e) =>
                   setFormData({ ...formData, tags: e.target.value })
                 }
@@ -128,7 +144,7 @@ const CreateArticle: NextPage = () => {
             </div>
             <SimpleMdeEditor value={textareaValue} onChange={markdownHandler} />
             <button className="send-button" type="submit">
-              <Image src={SaveIcon} alt="Send" />
+              <Image src={SendIcon} alt="Save" />
               Send
             </button>
           </form>
@@ -136,6 +152,4 @@ const CreateArticle: NextPage = () => {
       </div>
     </CreateArticleStyling>
   );
-};
-
-export default CreateArticle;
+}
