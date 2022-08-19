@@ -34,7 +34,7 @@ export default function EditPost() {
       alert("Login first");
       Router.push("/login");
     }
-    if (localUser.me._id !== data?.user?._id) {
+    if (localUser.me._id !== data.user._id) {
       alert("You don't have permission");
       Router.push("/login");
     }

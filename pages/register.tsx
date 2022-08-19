@@ -75,7 +75,7 @@ export default function RegisterPage() {
           }
         />
         <button>Register</button>
-        {isError && <p style={{ color: "red" }}>Can't register</p>}
+        {isError && <p style={{ color: "red" }}>Can not register</p>}
       </form>
     </AuthStyling>
   );
