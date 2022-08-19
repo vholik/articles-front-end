@@ -8,6 +8,7 @@ import "easymde/dist/easymde.min.css";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import SaveIcon from "./images/save.svg";
+import Head from "next/head";
 
 const SimpleMdeEditor = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -83,6 +84,10 @@ const CreateArticle: NextPage = () => {
 
   return (
     <CreateArticleStyling>
+      <Head>
+        <title>Create an article - Articleholik</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="container">
         <div className="creating-wrapper">
           <form className="form" onSubmit={handleSendPost}>

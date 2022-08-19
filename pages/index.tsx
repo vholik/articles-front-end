@@ -8,6 +8,7 @@ import { useState } from "react";
 import Loading from "./images/loading.svg";
 import Recent from "./images/recent.svg";
 import Popular from "./images/popular.svg";
+import Head from "next/head";
 
 const Home: NextPage = () => {
   const { data = [], isLoading } = useGetPostsQuery();
@@ -40,6 +41,10 @@ const Home: NextPage = () => {
 
   return (
     <HomeStyling>
+      <Head>
+        <title>Main page - Articleholik</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="container">
         <div className="tags-wrapper">
           <div className="tags-title"></div>

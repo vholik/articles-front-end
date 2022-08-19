@@ -9,8 +9,9 @@ import Image from "next/image";
 import Router from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import SendIcon from "../images/Save.svg";
+import SendIcon from "../images/save.svg";
 import "easymde/dist/easymde.min.css";
+import Head from "next/head";
 
 const SimpleMdeEditor = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -97,6 +98,10 @@ export default function EditPost() {
 
   return (
     <CreateArticleStyling>
+      <Head>
+        <title>Edit post - Articleholik</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="container">
         <div className="creating-wrapper">
           <form className="form" onSubmit={handleSendPost}>

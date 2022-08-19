@@ -10,6 +10,7 @@ import Link from "next/link";
 import Trash from "../images/delete.svg";
 import Edit from "../images/Edit.svg";
 import { useDeletePostMutation } from "../redux/postsApi";
+import Head from "next/head";
 
 export default function Post() {
   const router = useRouter();
@@ -50,6 +51,10 @@ export default function Post() {
   };
   return (
     <PostPageStyling>
+      <Head>
+        <title>{`See post by ${data?.user?.fullName} - Articleholik`}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="container">
         <div className="post-wrapper">
           <div className="user-header">
@@ -82,7 +87,7 @@ export default function Post() {
             <div
               className="cover"
               style={{
-                backgroundImage: `url('http://localhost:4444${data.imageUrl}')`,
+                backgroundImage: `url('http://localhost:4444${data?.imageUrl}')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",

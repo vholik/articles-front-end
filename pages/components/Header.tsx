@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Logo from "../images/logo.svg";
 import Search from "../images/Search.svg";
-import Write from "../images/write.svg";
+import Write from "../images/Write.svg";
 import Account from "../images/account.svg";
 import Logout from "../images/Logout.svg";
 import { useGetPostsQuery } from "../redux/postsApi";

@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useGetUserMutation } from "./redux/authApi";
 import { addToken } from "./redux/userSlice";
 import { useDispatch } from "react-redux";
-import Router from "next/router";
-import Link from "next/link";
+import Head from "next/head";
 import { AuthStyling } from "./style/style";
 import { IUser } from "./types";
 
@@ -49,6 +48,10 @@ const LoginPage = () => {
   };
   return (
     <AuthStyling>
+      <Head>
+        <title>Login - Articleholik</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <h1>Login to your account</h1>
       <form className="input-wrapper" onSubmit={handleGetUser}>
         <input

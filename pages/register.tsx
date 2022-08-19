@@ -1,12 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
-import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSendUserMutation } from "./redux/authApi";
 import { addToken } from "./redux/userSlice";
-import Router from "next/router";
 import { AuthStyling } from "./style/style";
 import { IUser } from "./types";
+import Head from "next/head";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -47,6 +45,10 @@ export default function RegisterPage() {
   };
   return (
     <AuthStyling>
+      <Head>
+        <title>Register - Articleholik</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <h1>Explore new articles with us</h1>
       <form onSubmit={handleSendUser} className="input-wrapper">
         <input
