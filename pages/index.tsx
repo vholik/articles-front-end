@@ -71,28 +71,28 @@ const Home: NextPage = () => {
                 .reverse()
                 .map((post: post) => (
                   <Post
-                    key={post._id}
-                    id={post._id}
-                    tags={post.tags}
-                    title={post.title}
-                    text={post.text}
-                    fullName={post.user.fullName}
-                    viewsCount={post.viewsCount}
-                    imageUrl={post.imageUrl!}
+                    key={post?._id}
+                    id={post?._id}
+                    tags={post?.tags}
+                    title={post?.title}
+                    text={post?.text}
+                    fullName={post?.user?.fullName}
+                    viewsCount={post?.viewsCount}
+                    imageUrl={post?.imageUrl!}
                   />
                 ))
             : [...data]
                 .sort((a, b) => b.viewsCount - a.viewsCount)
                 .map((post: post) => (
                   <Post
-                    key={post._id}
-                    id={post._id}
-                    tags={post.tags}
-                    title={post.title}
-                    text={post.text}
-                    fullName={post.user.fullName}
-                    viewsCount={post.viewsCount}
-                    imageUrl={post.imageUrl!}
+                    key={post?._id}
+                    id={post?._id}
+                    tags={post?.tags}
+                    title={post?.title}
+                    text={post?.text}
+                    fullName={post?.user?.fullName}
+                    viewsCount={post?.viewsCount}
+                    imageUrl={post?.imageUrl!}
                   />
                 ))}
         </div>
