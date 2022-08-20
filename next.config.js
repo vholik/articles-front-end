@@ -5,13 +5,12 @@
 // }
 
 module.exports = {
-  experimental: {
-    // Enables the styled-components SWC transform
-    styledComponents: true,
-    images: {
-      layoutRaw: true,
-    },
-  },
+  // experimental: {
+  //   styledComponents: true,
+  //   images: {
+  //     layoutRaw: true,
+  //   },
+  // },
 };
 
 // module.exports = nextConfig

@@ -3,8 +3,8 @@ import { useGetUserMutation } from "../redux/authApi";
 import { addToken } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import Head from "next/head";
-import { AuthStyling } from "./style/style";
-import { IUser } from "./types";
+import { AuthStyling } from "../style/style";
+import { IUser } from "../types";
 
 const LoginPage = () => {
   const dispatch = useDispatch();

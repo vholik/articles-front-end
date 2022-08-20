@@ -4,7 +4,7 @@ import {
   useUpdatePostMutation,
 } from "../../redux/postsApi";
 import { useRouter } from "next/router";
-import { CreateArticleStyling } from "../style/style";
+import { CreateArticleStyling } from "../../style/style";
 import Image from "next/image";
 import Router from "next/router";
 import { useCallback, useEffect, useState } from "react";
@@ -38,7 +38,7 @@ export default function EditPost() {
       alert("You don't have permission");
       Router.push("/login");
     }
-  });
+  }, [data.user._id]);
 
   const [imageUrl, setImageUrl] = useState(data.imageUrl || "");
   const [formData, setFormData] = useState({

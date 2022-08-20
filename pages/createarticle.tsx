@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useSendPostMutation, useSendImageMutation } from "../redux/postsApi";
-import { CreateArticleStyling } from "./style/style";
+import { CreateArticleStyling } from "../style/style";
 import { useCallback } from "react";
 import "easymde/dist/easymde.min.css";
 import Image from "next/image";

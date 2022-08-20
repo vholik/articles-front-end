@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { HeaderStyling } from "../style/style";
+import { HeaderStyling } from "../../style/style";
 import Link from "next/link";
 import { logOut } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ import Write from "../images/Write.svg";
 import Account from "../images/account.svg";
 import Logout from "../images/Logout.svg";
 import { useGetPostsQuery } from "../../redux/postsApi";
-import { post } from "../types";
+import { post } from "../../types";
 
 const Header: NextPage = () => {
   const { data = [], isLoading } = useGetPostsQuery();

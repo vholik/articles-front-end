@@ -1,4 +1,4 @@
-import { FooterStyling } from "../style/style";
+import { FooterStyling } from "../../style/style";
 import Link from "next/link";
 function Footer() {
   return (

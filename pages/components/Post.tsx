@@ -1,6 +1,6 @@
 import { NextPage } from "next";
-import { IPost } from "../types";
-import { PostStyling } from "../style/style";
+import { IPost } from "../../types";
+import { PostStyling } from "../../style/style";
 import Image from "next/image";
 import Link from "next/link";
 import lackOfImage from "../images/lackofimage.svg";

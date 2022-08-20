@@ -1,11 +1,11 @@
 import { useGetPostQuery } from "../../redux/postsApi";
 import { useRouter } from "next/router";
-import { PostPageStyling } from "../style/style";
+import { PostPageStyling } from "../../style/style";
 import { marked } from "marked";
 import Image from "next/image";
 import Loading from "../images/loading.svg";
 import lackOfImage from "../images/lackofimage.svg";
-import { ILocalUser } from "../types";
+import { ILocalUser } from "../../types";
 import Link from "next/link";
 import Trash from "../images/delete.svg";
 import Edit from "../images/Edit.svg";
