@@ -38,7 +38,7 @@ export default function EditPost() {
       alert("You don't have permission");
       Router.push("/login");
     }
-  }, []);
+  });
 
   const [imageUrl, setImageUrl] = useState(data.imageUrl || "");
   const [formData, setFormData] = useState({
