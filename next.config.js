@@ -5,12 +5,12 @@
 // }
 
 module.exports = {
-  // experimental: {
-  //   styledComponents: true,
-  //   images: {
-  //     layoutRaw: true,
-  //   },
-  // },
+  experimental: {
+    styledComponents: true,
+    images: {
+      layoutRaw: true,
+    },
+  },
 };
 
 // module.exports = nextConfig

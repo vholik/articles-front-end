@@ -44,7 +44,7 @@ const Post: NextPage<IPost> = ({
           )}
 
           <div className="tags-wrapper">
-            {tags.map((tag, i) => (
+            {tags?.map((tag, i) => (
               <div key={i} className="post-tag">
                 #{tag.trim()}
               </div>
