@@ -31,7 +31,7 @@ const Post: NextPage<IPost> = ({
             <div
               className="post-image"
               style={{
-                backgroundImage: `url('${process.env.REACT_APP_API_URL}${imageUrl}')`,
+                backgroundImage: `url('${"https://articlesholik.herokuapp.com"}${imageUrl}')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",

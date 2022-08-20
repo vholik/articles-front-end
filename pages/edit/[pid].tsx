@@ -55,7 +55,7 @@ export default function EditPost() {
     setTextAreaValue(value);
   }, []);
 
-  const src = `${process.env.REACT_APP_API_URL}${imageUrl}`;
+  const src = `${"https://articlesholik.herokuapp.com"}${imageUrl}`;
 
   const imageHandler = async (e: React.ChangeEvent) => {
     const formFiles = new FormData();
