@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useGetUserMutation } from "./redux/authApi";
-import { addToken } from "./redux/userSlice";
+import { useGetUserMutation } from "../redux/authApi";
+import { addToken } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import Head from "next/head";
 import { AuthStyling } from "./style/style";

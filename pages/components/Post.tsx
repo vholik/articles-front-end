@@ -6,7 +6,7 @@ import Link from "next/link";
 import lackOfImage from "../images/lackofimage.svg";
 import Eye from "../images/showsCount.svg";
 
-export const Post: NextPage<IPost> = ({
+const Post: NextPage<IPost> = ({
   tags,
   text,
   title,
@@ -55,3 +55,5 @@ export const Post: NextPage<IPost> = ({
     </PostStyling>
   );
 };
+
+export default Post;

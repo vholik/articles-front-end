@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { HeaderStyling } from "../style/style";
 import Link from "next/link";
-import { logOut } from "../redux/userSlice";
+import { logOut } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
@@ -11,10 +11,10 @@ import Search from "../images/Search.svg";
 import Write from "../images/Write.svg";
 import Account from "../images/account.svg";
 import Logout from "../images/Logout.svg";
-import { useGetPostsQuery } from "../redux/postsApi";
+import { useGetPostsQuery } from "../../redux/postsApi";
 import { post } from "../types";
 
-export const Header: NextPage = () => {
+const Header: NextPage = () => {
   const { data = [], isLoading } = useGetPostsQuery();
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
@@ -123,3 +123,5 @@ export const Header: NextPage = () => {
     </HeaderStyling>
   );
 };
+
+export default Header;

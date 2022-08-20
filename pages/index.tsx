@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { post } from "./types";
-import { Post } from "./components/Post";
-import { useGetPostsQuery } from "./redux/postsApi";
+import Post from "./components/Post";
+import { useGetPostsQuery } from "../redux/postsApi";
 import Image from "next/image";
 import { HomeStyling } from "./style/style";
 import { useState } from "react";

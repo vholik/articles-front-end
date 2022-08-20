@@ -2,7 +2,7 @@ import {
   useGetPostQuery,
   useSendImageMutation,
   useUpdatePostMutation,
-} from "../redux/postsApi";
+} from "../../redux/postsApi";
 import { useRouter } from "next/router";
 import { CreateArticleStyling } from "../style/style";
 import Image from "next/image";
