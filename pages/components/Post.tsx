@@ -31,7 +31,7 @@ const Post: NextPage<IPost> = ({
             <div
               className="post-image"
               style={{
-                backgroundImage: `url('${process.env.API_URL}${imageUrl}')`,
+                backgroundImage: `url('${process.env.REACT_APP_API_URL}${imageUrl}')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
