@@ -5,7 +5,7 @@ import { marked } from "marked";
 import Image from "next/image";
 import Loading from "../images/loading.svg";
 import lackOfImage from "../images/lackofimage.svg";
-import { ILocalUser } from "../../types";
+import { ILocalUser, post } from "../../types";
 import Link from "next/link";
 import Trash from "../images/delete.svg";
 import Edit from "../images/Edit.svg";
@@ -15,10 +15,10 @@ import Head from "next/head";
 export default function Post() {
   const router = useRouter();
   const { pid } = router.query;
-  const { data = {}, isLoading } = useGetPostQuery(pid);
-  const [deleteUser] = useDeletePostMutation();
+  const { data, isLoading } = useGetPostQuery(pid as string);
+  const [deletePost] = useDeletePostMutation();
 
-  if (isLoading && !data._id)
+  if (isLoading && !data)
     return (
       <div className="loading-wrapper">
         <Image
@@ -33,12 +33,12 @@ export default function Post() {
   const localUser: ILocalUser = JSON.parse(localStorage.getItem("user")!);
   const canEdit = localUser?.me._id === data?.user?._id;
   const getMarkdownText = () => {
-    const rawMarkup = marked(data.text ? data.text : "", { sanitize: true });
+    const rawMarkup = marked(data?.text ? data.text : "", { sanitize: true });
     return { __html: rawMarkup };
   };
 
   const deleteHandler = async () => {
-    await deleteUser(data._id)
+    await deletePost(data?._id)
       .unwrap()
       .then((payload) => {
         alert("Post succesfully deleted");

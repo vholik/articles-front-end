@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { post } from "../types";
 
 export const postsApi = createApi({
   reducerPath: "postsApi",
@@ -6,20 +7,20 @@ export const postsApi = createApi({
     baseUrl: "https://articlesholik.herokuapp.com",
   }),
   endpoints: (build) => ({
-    getPosts: build.query({
-      query: (arg: void) => `posts`,
+    getPosts: build.query<post[], void>({
+      query: () => `posts`,
     }),
-    getPost: build.query({
+    getPost: build.query<post, string>({
       query: (id) => `posts/${id}`,
     }),
-    sendImage: build.mutation({
+    sendImage: build.mutation<{ url: string }, any>({
       query: (body) => ({
         url: "upload",
         method: "POST",
         headers: {
           Authorization: JSON.parse(localStorage.getItem("user")!).token,
         },
-        body: body[0],
+        body: body,
       }),
     }),
     sendPost: build.mutation({
@@ -42,8 +43,8 @@ export const postsApi = createApi({
         body: body,
       }),
     }),
-    deletePost: build.mutation({
-      query: (id) => ({
+    deletePost: build.mutation<string, any>({
+      query: (id: string) => ({
         url: `/posts/${id}`,
         method: "DELETE",
         headers: {

@@ -10,9 +10,11 @@ import Recent from "./images/recent.svg";
 import Popular from "./images/popular.svg";
 import Head from "next/head";
 
+type sortingType = "new" | "popular";
+
 const Home: NextPage = () => {
   const { data = [], isLoading } = useGetPostsQuery();
-  const [sortingBy, setSortingBy] = useState("new");
+  const [sortingBy, setSortingBy] = useState<sortingType>("new");
 
   if (isLoading)
     return (
@@ -26,7 +28,11 @@ const Home: NextPage = () => {
         />
       </div>
     );
-  const popularPosts = [...data].sort((a, b) => b.viewsCount - a.viewsCount);
+
+  const popularPosts: post[] = [...data].sort(
+    (a, b) => b.viewsCount - a.viewsCount
+  );
+
   const popularTags = (): [] | Array<string> => {
     let tags: Array<string> = [];
     popularPosts.map((post: post) => {

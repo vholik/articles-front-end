@@ -20,7 +20,7 @@ const SimpleMdeEditor = dynamic(() => import("react-simplemde-editor"), {
 export default function EditPost() {
   const router = useRouter();
   const { pid } = router.query;
-  const { data = {}, isLoading } = useGetPostQuery(pid);
+  const { data } = useGetPostQuery(pid as string);
   const [user, setUser] = useState({
     isLogged: false,
     token: "",
@@ -38,9 +38,9 @@ export default function EditPost() {
       alert("You don't have permission");
       Router.push("/login");
     }
-  }, []);
+  }, [data]);
 
-  const [imageUrl, setImageUrl] = useState(data.imageUrl || "");
+  const [imageUrl, setImageUrl] = useState(data?.imageUrl || "");
   const [formData, setFormData] = useState({
     title: data?.title,
     tags: data?.tags?.toString(),
@@ -66,7 +66,7 @@ export default function EditPost() {
     if (targets.files) {
       const file = targets.files[0];
       formFiles.append("image", file);
-      await sendImage([formFiles, user.token])
+      await sendImage(formFiles)
         .unwrap()
         .then((payload) => {
           console.log(payload);
@@ -85,11 +85,11 @@ export default function EditPost() {
       ...formData,
       text: textareaValue,
       imageUrl,
-      _id: data._id,
+      _id: data?._id,
     })
       .unwrap()
       .then((payload) => {
-        window.location.replace(`/posts/${data._id}`);
+        window.location.replace(`/posts/${data?._id}`);
       })
       .catch((error) => {
         alert("Error ocurred");
